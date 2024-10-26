@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Signup Form</title>
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      background-color: #f0f2f5;
+    }
+    .form-container {
+      width: 300px;
+      padding: 20px;
+      background-color: #ffffff;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      text-align: center;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    input[type="text"], input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .success-message, .error-message {
+      color: green;
+      font-size: 0.9em;
+    }
+    .error-message {
+      color: red;
+    }
+    .submit-button {
+      padding: 10px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      border-radius: 4px;
+    }
+    .submit-button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Signup Form</h2>
+    <form id="signupForm">
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" oninput="validateEmail()">
+        <p id="emailMessage" class="error-message"></p>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" oninput="validatePassword()">
+        <p id="passwordMessage" class="error-message"></p>
+      </div>
+      <button type="button" class="submit-button" onclick="handleSubmit()">Submit</button>
+      <p id="successMessage" class="success-message" style="display: none;">All good to go!</p>
+    </form>
+  </div>
+
+  <script>
+    function validateEmail() {
+      const emailInput = document.getElementById('email');
+      const emailMessage = document.getElementById('emailMessage');
+      const successMessage = document.getElementById('successMessage');
+      
+      if (emailInput.value.length > 3 && emailInput.value.includes('@') && emailInput.value.includes('.')) {
+        emailMessage.textContent = '';
+        if (validatePassword()) successMessage.style.display = 'block';
+      } else {
+        emailMessage.textContent = 'Email must contain "@" and "." and be longer than 3 characters.';
+        successMessage.style.display = 'none';
+      }
+    }
+
+    function validatePassword() {
+      const passwordInput = document.getElementById('password');
+      const passwordMessage = document.getElementById('passwordMessage');
+      const successMessage = document.getElementById('successMessage');
+      
+      if (passwordInput.value.length > 8) {
+        passwordMessage.textContent = '';
+        if (validateEmail()) successMessage.style.display = 'block';
+        passwordMessage.textContent = 'Password must be longer than 8 charactershghhhv.';
+      } else {
+        passwordMessage.textContent = 'Password must be longer than 8 characters.';
+        successMessage.style.display = 'none';
+      }
+    }
+
+    function handleSubmit() {
+      const emailInput = document.getElementById('email');
+      const passwordInput = document.getElementById('password');
+      const successMessage = document.getElementById('successMessage');
+      
+      if (confirm('Are you sure you want to submit?')) {
+        alert('Successful signup!');
+      } else {
+        emailInput.value = '';
+        passwordInput.value = '';
+        successMessage.style.display = 'none';
+      }
+    }
+  </script>
+
+</body>
+</html>
